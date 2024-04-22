@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User History</title>
+</head>
+<body>
+    <h1 style="text-align: center; margin-top: 20px;">User History</h1>
+    <table style="width: 80%; margin: 20px auto; border-collapse: collapse; background-color: #fff; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);">
+        <thead>
+            <tr>
+                <th style="padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">Component</th>
+                <th style="padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">Value</th>
+                <th style="padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; background-color: #f2f2f2;">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for component in components_data %}
+            <tr>
+                <td style="padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ component.component }}</td>
+                <td style="padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ component.value }}</td>
+                <td style="padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd;">{{ component.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <!-- Bouton pour afficher le graphique -->
+    <form method="get" action="/auth/uploads/History/graph" enctype="multipart/form-data">
+       
+        <button id="showGraphBtn">Show Graph</button>
+
+    </form>
+    
+    <!-- Container to display graph -->
+    <div id="graphContainer"></div>
+
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function showGraphForCurrentUser() {
+            // Send AJAX request to server to get graph data for the current user
+            $.ajax({
+                url: '/uploads/History/graph',
+                method: 'GET',
+                success: function(response) {
+                    // Display the graph in the dedicated container
+                    $('#graphContainer').html(response);
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error('Error:', error);
+                }
+            });
+        }
+    
+        // Function to handle button click event
+        $(document).ready(function() {
+            $('#showGraphBtn').click(function() {
+                // Call the function to show the graph for the current user
+                showGraphForCurrentUser();
+            });
+        });
+    </script>
+    
+
+    
+</body>
+</html>
