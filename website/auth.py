@@ -210,7 +210,7 @@ def plot():
     return render_template('AdminGraphs.html', plots=plots)
 
     
-#--------------------------------------------File Functions----------------------------------------------------------------
+#------------------------------------File Functions----------------------------------------------------------------
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
