@@ -140,7 +140,7 @@ def userComponents():
 @is_admin
 def admin_dashboard():
     
-    users_data = [{'email': user[0], 'username': user[1],'password': user[2], 'role': user[3],'lastTL' :user[4]  } for user in website.models.users()]
+    users_data = [{'email': user[0], 'username': user[1],'password': user[2], 'role': user[3],'lastTL':user[4]  } for user in website.models.users()]
     
     return render_template("AllUsers.html", users_data=users_data)
 
